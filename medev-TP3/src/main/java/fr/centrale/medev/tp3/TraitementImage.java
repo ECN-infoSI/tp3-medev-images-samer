@@ -16,23 +16,34 @@ public class TraitementImage {
     }
     
     public Image genererHistogramme(Image image){
-        int longeurIMG = image.getLongeur();
-        int largeurIMG = image.getLargeur();
         Image histogram = new Image();
-        histogram.setLongeur(256);
-        ArrayList<Integer> pixels = image.getPixels();
-        int nbPixels = pixels.size();
         int[] listOccurenceGris = image.getListeOccurenceGris();
-        int max = listOccurenceGris[0]; // Assume the first element is the largest initially
+        // Calculer le nb maximum d'occurence pour une valuer donnée de niveua de gris
+        int maxOccurence = listOccurenceGris[0]; 
         for (int i = 1; i < listOccurenceGris.length; i++) {
-            if (listOccurenceGris[i] > max) {
-                max = listOccurenceGris[i];
+            if (listOccurenceGris[i] > maxOccurence) {
+                maxOccurence = listOccurenceGris[i];
         }
-        histogram.SetLargeur(max);
-        histogram.SetLongeur(image.getValeurMaxGris()+1);
-           
+        int maxValuerGris = image.getValeurMaxGris();
+        
+        histogram.SetLongeur(maxOccurence);
+        histogram.SetLargeur(maxValeurGris);
+        int[][] histogramPixels;
+        for (int j=0;j <= histogram.getLargeur();j++){ // j = valeur de gris
+            for (int k=0;k <= histogram.getLongeur();k++){
+                int nbOccurence = listOccurenceGris[j];
+                if (nbOccurence > 0) {
+                    histogramPixels[k][j] = 255;
+                    nbOccurence--;
+                }
+                else {
+                    histogramPixels[k][j] = 0;
+                }
+            }
+        }
+        histogram.setImage(histogramPixels);
     }
-      return null;  
+      return histogram;  
     }
     
     public Image seuillage(Image image){
