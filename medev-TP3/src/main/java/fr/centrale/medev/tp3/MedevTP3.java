@@ -1,16 +1,23 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- */
-
 package fr.centrale.medev.tp3;
+
+
+import javax.swing.*;
+import fr.centrale.medev.tp3.Image;
 
 /**
  *
- * @author samer
+ * @author Samer & Fernando & Larissa
  */
 public class MedevTP3 {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+       SwingUtilities.invokeLater(() -> {
+            GUI fenetre = new GUI();
+            fenetre.setVisible(true);
+        }); 
     }
 }
+
+//ocurrence:
+// comparaison par histogramme:
+//nb de pixels 
