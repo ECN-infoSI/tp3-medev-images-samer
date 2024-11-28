@@ -42,6 +42,9 @@ public final class PGMIO {
      */
     private static final int MAXVAL = 255;
 
+    /**
+     *
+     */
     public PGMIO() {
     } //modified from the original code
 

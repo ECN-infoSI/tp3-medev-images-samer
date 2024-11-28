@@ -10,6 +10,10 @@ package fr.centrale.medev.tp3;
  */
 public class MedevTP3 {
 
+    /**
+     * Fonction principale
+     * @param args
+     */
     public static void main(String[] args) {
         System.out.println("Init");
         
