@@ -29,14 +29,22 @@ public class Image {
     }
     
     //Methods
+    /**
+     * 
+     * @param chemin : chemin de l'
+     */
     public void lecturePGM(String chemin){
          File imgFile = new File(chemin);
          
         try {
            this.image =  PGMIO.read(imgFile);
         } catch (IOException ex) {
+            System.out.println("Something went wrong");
        }
-        
+       
+       //Get largeur et longueur
+       this.longueur = image.length;
+       this.largeur = image[0].length;        
     }
     
     /**
@@ -46,9 +54,9 @@ public class Image {
      * listeOccurenceGris[0]
      */
     public void compterOccurenceGris(){
-        for (int[] image1 : this.image) {
-            for (int j = 0; j < image1.length; j++) {
-                listeOccurenceGris[image1[j]] += 1;
+        for (int i = 0; i<this.image.length; i++) {
+            for (int j = 0; j < image.length; j++) {
+                listeOccurenceGris[image[i][j]] += 1;
             }
         }
         
@@ -100,10 +108,26 @@ public class Image {
     public void setListeOccurenceGris(int[] listeOccurenceGris) {
         this.listeOccurenceGris = listeOccurenceGris;
     }
+    
+    //Print results
 
     @Override
     public String toString() {
         return "Image{" + "largeur=" + largeur + ", longueur=" + longueur +  ", valeurMaxGris=" + valeurMaxGris + '}';
+    }
+    
+    public void affiche(){
+        System.out.println(toString());
+        
+        for(int i =0; i<this.longueur; i++){
+            for (int j =0; j <this.largeur; j++){
+                System.out.println(this.image[i][j]);
+            }
+        }
+        
+        for(int i =0; i <255; i++){
+            System.out.println(this.listeOccurenceGris[i]);
+        }
     }
     
     

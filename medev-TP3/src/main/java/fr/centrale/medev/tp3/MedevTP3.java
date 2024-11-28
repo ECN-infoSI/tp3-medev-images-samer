@@ -15,7 +15,10 @@ public class MedevTP3 {
         
        Image image1 = new Image();
        image1.lecturePGM("./ImagesTestPGM/baboon.pgm");
+       image1.compterOccurenceGris();
        
+       image1.affiche();
+             
         
     }
 }
