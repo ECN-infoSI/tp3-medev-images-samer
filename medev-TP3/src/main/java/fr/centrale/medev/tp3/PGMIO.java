@@ -42,7 +42,8 @@ public final class PGMIO {
      */
     private static final int MAXVAL = 255;
 
-    public PGMIO() {} //modified from the original code
+    public PGMIO() {
+    } //modified from the original code
 
     /**
      * Reads a grayscale image from a file in PGM format.
@@ -58,6 +59,7 @@ public final class PGMIO {
             final int col = Integer.parseInt(next(stream));
             final int row = Integer.parseInt(next(stream));
             final int max = Integer.parseInt(next(stream));
+                       
             if (max < 0 || max > MAXVAL)
                 throw new IOException("The image's maximum gray value must be in range [0, " + MAXVAL + "].");
             final int[][] image = new int[row][col];
@@ -71,14 +73,41 @@ public final class PGMIO {
                     image[i][j] = p;
                 }
             }
+            
             return image;
+        } finally {
+            stream.close();
+        }
+    }
+    
+     /**
+     * Returns a vector that contains the number of columns, rows and the max gray value in the image.
+     * Author: Larissa, based in his initial code.
+     * @param file the PGM file read from
+     * @return two-dimensional byte array representation of the image
+     * @throws IOException
+     */
+    public static int[] getAttributes(final File file) throws IOException {
+        final BufferedInputStream stream = new BufferedInputStream(new FileInputStream(file));
+        try {
+            if (!next(stream).equals(MAGIC))
+                throw new IOException("File " + file + " is not a binary PGM image.");
+            
+            final int col = Integer.parseInt(next(stream));
+            final int row = Integer.parseInt(next(stream));
+            final int max = Integer.parseInt(next(stream));
+            
+            final int[] attributes = {col, row, max};
+  
+            return attributes;
         } finally {
             stream.close();
         }
     }
 
     /**
-     * Finds the next whitespace-delimited string in a stream, ignoring any comments.
+     * Finds the nextrow = Integer.parseInt(next(stream));
+            final int  whitespace-delimited string in a stream, ignoring any comments.
      * @param stream the stream read from
      * @return the next whitespace-delimited string
      * @throws IOException

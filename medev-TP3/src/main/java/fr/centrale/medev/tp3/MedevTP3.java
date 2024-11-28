@@ -14,7 +14,7 @@ public class MedevTP3 {
         System.out.println("Init");
         
        Image image1 = new Image();
-       image1.lecturePGM("./ImagesTestPGM/baboon.pgm");
+       image1.lecturePGM("C:\\Users\\User\\Documents\\INFOSI\\MEDEV\\tp3-medev-images-samer\\medev-TP3\\src\\main\\java\\fr\\centrale\\medev\\tp3\\ImagesTestPGM/baboon.pgm");
        image1.compterOccurenceGris();
        
        image1.affiche();
@@ -22,7 +22,3 @@ public class MedevTP3 {
         
     }
 }
-
-//ocurrence:
-// comparaison par histogramme:
-//nb de pixels 

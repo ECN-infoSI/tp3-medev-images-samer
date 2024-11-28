@@ -40,11 +40,20 @@ public class Image {
            this.image =  PGMIO.read(imgFile);
         } catch (IOException ex) {
             System.out.println("Something went wrong");
+            ex.printStackTrace();
        }
        
-       //Get largeur et longueur
-       this.longueur = image.length;
-       this.largeur = image[0].length;        
+        try {
+           int[] attributes = PGMIO.getAttributes(imgFile);
+           
+           this.longueur = attributes[0];
+           this.largeur = attributes[1];
+           this.valeurMaxGris = attributes[2];
+           
+        } catch (IOException ex) {
+            ex.printStackTrace();
+       }
+       
     }
     
     /**
@@ -119,15 +128,8 @@ public class Image {
     public void affiche(){
         System.out.println(toString());
         
-        for(int i =0; i<this.longueur; i++){
-            for (int j =0; j <this.largeur; j++){
-                System.out.println(this.image[i][j]);
-            }
-        }
         
-        for(int i =0; i <255; i++){
-            System.out.println(this.listeOccurenceGris[i]);
-        }
+        
     }
     
     
