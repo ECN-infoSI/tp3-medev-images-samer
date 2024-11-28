@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import java.awt.image.BufferedImage;
 
 public class GUI_traitements extends JFrame {
 
@@ -34,6 +35,13 @@ public class GUI_traitements extends JFrame {
                     "Histogramme généré avec succès!",
                     "Traitement",
                     JOptionPane.INFORMATION_MESSAGE);
+            // Générer une image BufferedImage du histogramme
+            HistogramPanel panelHistogramme = new HistogramPanel(histogram);
+            BufferedImage bufferedImage = panelHistogramme.toBufferedImage(800, 600);
+
+            // Ouvrir une nouvelle fenêtre pour afficher le histogramme
+            HistogramImageViewer viewer = new HistogramImageViewer(bufferedImage);
+            viewer.setVisible(true); // Afficher la fenêtre du histogramme
         });
 
         // Action pour le seuillage
