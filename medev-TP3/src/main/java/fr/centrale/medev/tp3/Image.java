@@ -1,5 +1,6 @@
 package fr.centrale.medev.tp3;
-import java.util.ArrayList;
+import java.io.File;  // Import the File class
+import java.io.IOException;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -13,39 +14,43 @@ import java.util.ArrayList;
 public class Image {
     private int largeur;
     private int longueur;
-    private ArrayList<int> pixels;
+    private int[][] image;
     private int valeurMaxGris;
     private int[] listeOccurenceGris;
     
-    // Constructeur
     /**
-     * 
-     * @param largeur
-     * @param longueur
-     * @param pixels
-     * @param valeurMaxGris
-     * @param listeOccurenceGris 
+     * Constructeur
      */
-    public Image(int largeur, int longueur, ArrayList<int> pixels, int valeurMaxGris, int[] listeOccurenceGris) {
-        this.largeur = largeur;
-        this.longueur = longueur;
-        this.pixels = pixels;
-        this.valeurMaxGris = valeurMaxGris;
-        this.listeOccurenceGris = listeOccurenceGris;
-    }
-    
-    
-    public Image(){
-       super(0,0, null, 0, null); 
+    public Image() {
+        this.largeur = 0; 
+        this.longueur = 0;
+        this.valeurMaxGris = 0;
+        this.listeOccurenceGris = new int[256];
     }
     
     //Methods
     public void lecturePGM(String chemin){
-        PGMIO image = new PGMIO();
-        image.read(chemin);
+         File imgFile = new File(chemin);
+         
+        try {
+           this.image =  PGMIO.read(imgFile);
+        } catch (IOException ex) {
+       }
+        
     }
     
+    /**
+     * Compte l'occurence de chaque ton de gris et l'ajoute
+     * dans l'array listeOccurrenceGris dans la position respective.
+     * Par exemple: le nombre d'occurences de blanc est stocké dans 
+     * listeOccurenceGris[0]
+     */
     public void compterOccurenceGris(){
+        for (int[] image1 : this.image) {
+            for (int j = 0; j < image1.length; j++) {
+                listeOccurenceGris[image1[j]] += 1;
+            }
+        }
         
     }
     
@@ -71,13 +76,14 @@ public class Image {
         this.longueur = longueur;
     }
 
-    public ArrayList<<any>> getPixels() {
-        return pixels;
+    public int[][] getImage() {
+        return image;
     }
 
-    public void setPixels(ArrayList<<any>> pixels) {
-        this.pixels = pixels;
+    public void setImage(int[][] image) {
+        this.image = image;
     }
+
 
     public int getValeurMaxGris() {
         return valeurMaxGris;
@@ -94,12 +100,10 @@ public class Image {
     public void setListeOccurenceGris(int[] listeOccurenceGris) {
         this.listeOccurenceGris = listeOccurenceGris;
     }
-    
-    //toString
 
     @Override
     public String toString() {
-        return "Image{" + "largeur=" + largeur + ", longueur=" + longueur + ", pixels=" + pixels + ", valeurMaxGris=" + valeurMaxGris + ", listeOccurenceGris=" + listeOccurenceGris + '}';
+        return "Image{" + "largeur=" + largeur + ", longueur=" + longueur +  ", valeurMaxGris=" + valeurMaxGris + '}';
     }
     
     
