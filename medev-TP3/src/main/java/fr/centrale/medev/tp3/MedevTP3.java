@@ -11,6 +11,15 @@ package fr.centrale.medev.tp3;
 public class MedevTP3 {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        System.out.println("Init");
+        
+       Image image1 = new Image();
+       image1.lecturePGM("./ImagesTestPGM/baboon.pgm");
+       
+        
     }
 }
+
+//ocurrence:
+// comparaison par histogramme:
+//nb de pixels 
