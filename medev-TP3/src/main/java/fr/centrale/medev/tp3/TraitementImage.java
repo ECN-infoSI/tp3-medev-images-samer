@@ -46,8 +46,22 @@ public class TraitementImage {
       return histogram;  
     }
     
-    public Image seuillage(Image image){
-        return null;      
+    public Image seuillage(Image image, int seuil){
+        Image imageBinaire = new Image(image);
+        int[][] pixels = image.getImage();
+        for (int i=0;i<pixels.length;i++){
+            for (int j=0;j<pixels[0].length;j++){
+                if (pixels[i][j] <= seuil){
+                    pixels[i][j] = 255;
+                }
+                else {
+                    pixels[i][j] = 0;
+                }
+            }
+        }
+        imageBinaire.setImage(pixels);
+        
+        return imageBinaire;      
     }
     
     public int[] comparaison(Image image1, Image image2){
